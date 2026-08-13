@@ -3,188 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JAYDEN Motors Namibia | Premium Pre-Owned Vehicles</title>
+    <title>Independence Motors & Rental | Premium Pre-Owned</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
         <div class="container header-container">
             <div class="logo">
-                <a href="#home" aria-label="JAYDEN Motors Namibia Home">
-                    <img src="images/logo/logo_pmn.jpg" alt="JAYDEN Motors Namibia Logo">
+                <a href="#home">
+                    <img src="images/logo/ImarLogo.png" alt="Independence Motors">
                     <div class="logo-text">
-                        <span class="logo-main">JAYDEN Motors</span>
-                        <span class="logo-sub">Namibia</span>
+                        <span class="logo-main">Independence Motors</span>
+                        <span class="logo-sub">Premium pre-owned</span>
                     </div>
                 </a>
             </div>
-            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle main menu">
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="menu">
                 <i class="fas fa-bars"></i>
             </button>
-            <nav id="main-nav" aria-label="Main navigation">
+            <nav id="main-nav">
                 <ul>
-                    <li><a href="#home" class="nav-link active" aria-current="page">Home</a></li>
-                    <li><a href="#cars" class="nav-link">Inventory</a></li>
-                    <li><a href="#services" class="nav-link">Services</a></li>
-                    <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#cars">Inventory</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <main>
-        <section class="hero" id="home" aria-labelledby="hero-title">
-    <div class="hero-carousel" role="region" aria-label="Image Carousel of our Vehicles">
-        <div class="carousel-slide active" aria-hidden="false">
-            <img src="images/carousel/car1.jpg" alt="A sleek black sedan parked in a modern showroom." class="carousel-img">
-        </div>
-        <div class="carousel-slide" aria-hidden="true">
-            <img src="images/carousel/car2.jpg" alt="A rugged silver SUV on a dirt road with a beautiful desert landscape in the background." class="carousel-img">
-        </div>
-        <div class="carousel-slide" aria-hidden="true">
-            <img src="images/carousel/car3.jpg" alt="A powerful red truck parked in an urban setting at sunset." class="carousel-img">
-        </div>
-         <div class="carousel-slide" aria-hidden="true">
-            <img src="images/carousel/car4.jpg" alt="A powerful red truck parked in an urban setting at sunset." class="carousel-img">
-        </div> <div class="carousel-slide" aria-hidden="true">
-            <img src="images/carousel/car5.jpg" alt="A powerful red truck parked in an urban setting at sunset." class="carousel-img">
-        </div> <div class="carousel-slide" aria-hidden="true">
-            <img src="images/carousel/car6.jpg" alt="A powerful red truck parked in an urban setting at sunset." class="carousel-img">
-        </div>
-
-        <button class="carousel-btn prev-btn" aria-label="Previous image">
-            <i class="fas fa-chevron-left" aria-hidden="true"></i>
-        </button>
-        <button class="carousel-btn next-btn" aria-label="Next image">
-            <i class="fas fa-chevron-right" aria-hidden="true"></i>
-        </button>
-        
-        <div class="carousel-dots" role="tablist" aria-label="Image slide pagination">
-            <button class="dot active" role="tab" aria-selected="true" aria-controls="slide1" aria-label="Go to slide 1"></button>
-            <button class="dot" role="tab" aria-selected="false" aria-controls="slide2" aria-label="Go to slide 2"></button>
-            <button class="dot" role="tab" aria-selected="false" aria-controls="slide3" aria-label="Go to slide 3"></button>
-        </div>
-    </div>
-    
-    <div class="hero-overlay"></div>
-    <div class="container">
-        <div class="hero-content">
-            <h1 id="hero-title">Premium Pre-Owned Vehicles in Namibia</h1>
-            <p class="hero-subtitle">We offer the finest selection of quality pre-owned vehicles with transparent pricing and exceptional customer service.</p>
-            <div class="hero-btns">
-                <a href="#cars" class="btn btn-primary" aria-label="Browse Our Vehicle Inventory">
-                    <i class="fas fa-car" aria-hidden="true"></i> Browse Inventory
-                </a>
-                <a href="#contact" class="btn btn-secondary" aria-label="Get in Touch with Our Team">
-                    <i class="fas fa-phone-alt" aria-hidden="true"></i> Get In Touch
-                </a>
+        <section class="hero" id="home">
+            <div class="hero-carousel">
+                <div class="carousel-slide active"><img src="images/carousel/car1.jpg" alt="Luxury sedan"></div>
+                <div class="carousel-slide"><img src="images/carousel/car2.jpg" alt="SUV offroad"></div>
+                <div class="carousel-slide"><img src="images/carousel/car3.jpg" alt="Sport truck"></div>
+                <div class="carousel-slide"><img src="images/carousel/car4.jpg" alt="Red sedan"></div>
+                <div class="carousel-slide"><img src="images/carousel/car5.jpg" alt="Black coupe"></div>
+                <div class="carousel-slide"><img src="images/carousel/car6.jpg" alt="White SUV"></div>
+                <button class="carousel-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-dots">
+                    <button class="dot active" data-index="0"></button>
+                    <button class="dot" data-index="1"></button>
+                    <button class="dot" data-index="2"></button>
+                    <button class="dot" data-index="3"></button>
+                    <button class="dot" data-index="4"></button>
+                    <button class="dot" data-index="5"></button>
+                </div>
             </div>
-        </div>
-    </div>
-</section>
+            <div class="hero-overlay"></div>
+            <div class="container hero-content">
+                <h1>Premium pre‑owned <br>vehicles in Namibia</h1>
+                <p>Finest selection, transparent pricing, and exceptional service — drive your dream today.</p>
+                <div class="hero-btns">
+                    <a href="#cars" class="btn btn-primary"><i class="fas fa-car"></i> Browse inventory</a>
+                    <a href="#contact" class="btn btn-outline"><i class="fas fa-phone-alt"></i> Contact us</a>
+                </div>
+            </div>
+        </section>
 
-        <section class="inventory" id="cars" aria-labelledby="cars-heading">
+        <section class="inventory" id="cars">
             <div class="container">
-                <h2 id="cars-heading">Available Cars</h2>
+                <div class="section-title">
+                    <h2>Available cars</h2>
+                    <span></span>
+                </div>
                 <div class="search-container">
                     <div class="search-bar">
-                        <label for="searchInput" class="sr-only">Search for a car</label>
-                        <input type="text" id="searchInput" placeholder="Search for a car by make, model, or year...">
-                        <button id="searchBtn" class="search-btn" aria-label="Search inventory">
-                            <i class="fas fa-search"></i>
-                        </button>
+                        <input type="text" id="searchInput" placeholder="Search make, model, year…">
+                        <button class="search-btn" id="searchBtn"><i class="fas fa-search"></i></button>
                     </div>
-                    <div class="filter-tags" role="group" aria-label="Car categories filter">
-                        <span class="filter-tag active" data-filter="all" tabindex="0" role="button" aria-pressed="true">All</span>
-                        <span class="filter-tag" data-filter="suv" tabindex="0" role="button" aria-pressed="false">SUVs</span>
-                        <span class="filter-tag" data-filter="sedan" tabindex="0" role="button" aria-pressed="false">Sedans</span>
-                        <span class="filter-tag" data-filter="truck" tabindex="0" role="button" aria-pressed="false">Trucks</span>
-                        <span class="filter-tag" data-filter="hatchback" tabindex="0" role="button" aria-pressed="false">Hatchbacks</span>
+                    <div class="filter-tags">
+                        <span class="filter-tag active" data-filter="all">All</span>
+                        <span class="filter-tag" data-filter="SUV">SUV</span>
+                        <span class="filter-tag" data-filter="sedan">Sedan</span>
+                        <span class="filter-tag" data-filter="Bakkie/ Pick-up">Bakkie</span>
+                        <span class="filter-tag" data-filter="Hatchback">Hatchback</span>
                     </div>
                 </div>
-                <div class="car-grid" id="carGrid">
-                    <p>No vehicles found. Please wait while we load our inventory.</p>
+                <div class="car-grid" id="carGrid"></div>
+            </div>
+        </section>
+
+        <section class="services" id="services">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our services</h2>
+                    <span></span>
                 </div>
+                <div class="services-grid" id="servicesGrid"></div>
             </div>
         </section>
 
-        <section class="services" id="services" aria-labelledby="services-heading">
+        <section class="testimonials" id="testimonials">
             <div class="container">
-                <h2 id="services-heading">Our Services</h2>
-                <p class="section-intro">We go beyond just selling cars. Our comprehensive services ensure you have the best ownership experience.</p>
-                
-                <div class="services-grid">
-                    </div>
+                <div class="section-title">
+                    <h2>What our customers say</h2>
+                    <span style="background: var(--accent);"></span>
+                </div>
+                <div class="testimonial-slider" id="testimonialSlider"></div>
             </div>
         </section>
 
-        <section class="testimonials" id="testimonials" aria-labelledby="testimonials-heading">
+        <section class="contact" id="contact">
             <div class="container">
-                <h2 id="testimonials-heading">What Our Customers Say</h2>
-                <div class="testimonial-slider" id="testimonialSlider" role="region" aria-live="polite">
-                    </div>
-            </div>
-        </section>
-
-        <section class="contact" id="contact" aria-labelledby="contact-heading">
-            <div class="container">
-                <h2 id="contact-heading">Contact Us</h2>
-                <p class="section-intro">Have questions or want to schedule a test drive? Get in touch with our team today.</p>
-                
+                <div class="section-title">
+                    <h2>Get in touch</h2>
+                    <span></span>
+                </div>
                 <div class="contact-container">
-                    <address class="contact-info">
-                        <h3>Visit Our Showroom</h3>
-                        <div class="contact-detail">
-                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                            <div>
-                                <p>123 Independence Avenue</p>
-                                <p>Windhoek, Namibia</p>
-                            </div>
-                        </div>
-                        <div class="contact-detail">
-                            <i class="fas fa-phone" aria-hidden="true"></i>
-                            <div>
-                                <p><a href="tel:+264816160682">+264 81 616 0682</a></p>
-                                <p>Mon-Fri: 8:30AM - 5:30PM</p>
-                                <p>Sat: 9:00AM - 1:00PM</p>
-                            </div>
-                        </div>
-                        <div class="contact-detail">
-                            <i class="fas fa-envelope" aria-hidden="true"></i>
-                            <div>
-                                <p><a href="mailto:info@jaydenmotorsnamibia.io">info@jaydenmotorsnamibia.io</a></p>
-                                <p><a href="mailto:sales@jaydenmotorsnamibia.io">sales@jaydenmotorsnamibia.io</a></p>
-                            </div>
-                        </div>
-                    </address>
-                    
+                    <div class="contact-info">
+                        <h3>Visit our showroom</h3>
+                        <div class="contact-detail"><i class="fas fa-map-marker-alt"></i><div><p>424 Independence Avenue</p><p>Windhoek, Namibia</p></div></div>
+                        <div class="contact-detail"><i class="fas fa-phone"></i><div><p><a href="tel:+26461307239">+264 61 307 239</a></p><p>Mon–Fri: 8:30AM – 5:30PM</p><p>Sat: 9:00AM – 1:00PM</p></div></div>
+                        <div class="contact-detail"><i class="fas fa-envelope"></i><div><p><a href="mailto:info@imar.com.na">info@imar.com.na</a></p><p><a href="mailto:sales@imar.com.na">sales@imar.com.na</a></p></div></div>
+                    </div>
                     <div class="contact-form">
-                        <form id="contactForm" aria-label="Contact form to get in touch">
-                            <div class="form-group">
-                                <label for="name">Your Name</label>
-                                <input type="text" id="name" name="name" required autocomplete="name" placeholder="First and Last Name">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <input type="email" id="email" name="email" required autocomplete="email" placeholder="Email Address">
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Phone Number</label>
-                                <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="Phone Number">
-                            </div>
-                            <div class="form-group">
-                                <label for="interest">Vehicle Interest (Optional)</label>
-                                <select id="interest" name="interest">
-                                    <option value="">Select a vehicle</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">Your Message</label>
-                                <textarea id="message" name="message" required placeholder="your message here"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        <form id="contactForm">
+                            <div class="form-group"><label for="name">Full name</label><input type="text" id="name" required placeholder="First and last name"></div>
+                            <div class="form-group"><label for="email">Email</label><input type="email" id="email" required placeholder="your@email.com"></div>
+                            <div class="form-group"><label for="phone">Phone</label><input type="tel" id="phone" placeholder="+264 81 123 4567"></div>
+                            <div class="form-group"><label for="interest">Vehicle interest</label><select id="interest"><option value="">Select a vehicle</option></select></div>
+                            <div class="form-group"><label for="message">Message</label><textarea id="message" rows="4" required placeholder="Tell us what you're looking for…"></textarea></div>
+                            <button type="submit" class="btn btn-primary" style="width:100%;">Send message</button>
                         </form>
                     </div>
                 </div>
@@ -195,53 +142,12 @@
     <footer>
         <div class="container">
             <div class="footer-container">
-                <div class="footer-col">
-                    <h3>JAYDEN Motors Namibia</h3>
-                    <p>Namibia's trusted source for quality pre-owned vehicles since 2010.</p>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com" aria-label="Visit us on Facebook" target="_blank"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                        <a href="https://www.instagram.com" aria-label="Visit us on Instagram" target="_blank"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                        <a href="https://www.x.com" aria-label="Visit us on X" target="_blank"><i class="fab fa-x" aria-hidden="true"></i></a>
-                        <a href="https://www.linkedIn.com" aria-label="Visit us on LinkedIn" target="_blank"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-col">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#cars">Inventory</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h3>Services</h3>
-                    <ul>
-                        <li><a href="#">Vehicle Inspection</a></li>
-                        <li><a href="#">Financing</a></li>
-                        <li><a href="#">Extended Warranty</a></li>
-                        <li><a href="#">Maintenance</a></li>
-                        <li><a href="#">Trade-In</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h3>Newsletter</h3>
-                    <p>Subscribe to get updates on new arrivals and special offers.</p>
-                    <form id="newsletterForm" aria-label="Newsletter subscription form">
-                        <label for="newsletterEmail" class="sr-only">Your email address</label>
-                        <input type="email" id="newsletterEmail" placeholder="Your email address" required autocomplete="email">
-                        <button type="submit" class="btn btn-accent">Subscribe</button>
-                    </form>
-                </div>
+                <div class="footer-col"><h3>Independence Motors</h3><p>Namibia's trusted source for quality pre‑owned vehicles since 2010.</p><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-x"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div></div>
+                <div class="footer-col"><h3>Quick links</h3><ul style="list-style:none;"><li><a href="#home">Home</a></li><li><a href="#cars">Inventory</a></li><li><a href="#services">Services</a></li><li><a href="#testimonials">Testimonials</a></li><li><a href="#contact">Contact</a></li></ul></div>
+                <div class="footer-col"><h3>Services</h3><ul style="list-style:none;"><li><a href="#">Inspection</a></li><li><a href="#">Financing</a></li><li><a href="#">Warranty</a></li><li><a href="#">Maintenance</a></li><li><a href="#">Trade‑in</a></li></ul></div>
+                <div class="footer-col"><h3>Newsletter</h3><p>New arrivals &amp; special offers.</p><form id="newsletterForm"><input type="email" id="newsletterEmail" placeholder="Your email" required style="padding:12px;border-radius:60px;border:none;width:100%;margin-bottom:10px;"><button type="submit" class="btn btn-accent" style="width:100%;">Subscribe</button></form></div>
             </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2026 JAYDEN Motors Namibia. All Rights Reserved.</p>
-            </div>
+            <div class="footer-bottom"><p>&copy; 2026 Independence Motors and Rental. All rights reserved.</p></div>
         </div>
     </footer>
 

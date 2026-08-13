@@ -1,560 +1,304 @@
-// Strict mode for better error checking
-'use strict';
+(function() {
+    'use strict';
 
-// --- DOM Elements ---
-// Using `const` for elements that won't be reassigned
-const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-const mainNav = document.getElementById('main-nav');
-const carGrid = document.getElementById('carGrid');
-const searchInput = document.getElementById('searchInput');
-const searchBtn = document.getElementById('searchBtn');
-const filterTagsContainer = document.querySelector('.filter-tags');
-const filterTags = filterTagsContainer ? filterTagsContainer.querySelectorAll('.filter-tag') : [];
-const testimonialSlider = document.getElementById('testimonialSlider');
-const contactForm = document.getElementById('contactForm');
-const newsletterForm = document.getElementById('newsletterForm');
-const interestSelect = document.getElementById('interest');
+    // ----- DATA -----
+    const cars = [
+        { id:1, make:'Toyota', model:'Land Cruiser', year:2010, fuel:'Diesel', mileage:'211 376 km', transmission:'Manual', displacement:'4.0', type:'Bakkie/ Pick-up', images:['images/lc79/tlc1.jpeg','images/lc79/tlc2.jpeg','images/lc79/tlc3.jpeg','images/lc79/tlc4.jpeg'], price:'N$ 400,000', description:'Robust and reliable pickup, perfect for work and off-road adventure.' },
+        { id:2, make:'BMW', model:'135i', year:2022, fuel:'Petrol', mileage:'63 873 km', transmission:'Automatic', displacement:'3.0', type:'Hatchback', images:['images/135m/b11.jpeg','images/135m/b12.jpeg','images/135m/b13.jpeg','images/135m/b14.jpeg','images/135m/b15.jpeg','images/135m/b16.jpeg','images/135m/b17.jpeg'], price:'N$ 679,000', description:'High-performance luxury compact with sharp handling and turbocharged power.' },
+        { id:3, make:'Mercedes-Benz', model:'C-Class', year:2018, fuel:'Petrol', mileage:'114 641 km', transmission:'Automatic', displacement:'2.0', type:'sedan', images:['images/c250/mbc1.jpeg','images/c250/mbc2.jpeg','images/c250/mbc3.jpeg','images/c250/mb4.jpeg'], price:'N$ 340,000', description:'Luxury and performance combined with state-of-the-art technology.' },
+        { id:4, make:'Isuzu', model:'D-Max', year:2014, fuel:'Diesel', mileage:'120 000 km', transmission:'Automatic', displacement:'1.9', type:'Bakkie/ Pick-up', images:['images/dmax/id1.jpeg','images/dmax/id2.jpeg','images/dmax/id3.jpeg','images/dmax/id4.jpeg','images/dmax/id5.jpeg'], price:'N$ 469,000', description:'Durable and fuel-efficient bakkie built for work and gravel roads.' },
+        { id:5, make:'Volkswagen', model:'Golf R', year:2014, fuel:'Petrol', mileage:'65 297 km', transmission:'Automatic', displacement:'2.0', type:'Hatchback', images:['images/golfr/vwg7r1.jpeg','images/golfr/vwg7r2.jpeg','images/golfr/vwg7r3.jpeg','images/golfr/vwg7r4.jpeg','images/golfr/vwg7r5.jpeg'], price:'N$ 299,000', description:'Ultimate hot hatch with 4Motion all-wheel drive and iconic exhaust note.' },
+        { id:6, make:'Volkswagen', model:'Polo', year:2022, fuel:'Petrol', mileage:'16 281 km', transmission:'Automatic', displacement:'1.0', type:'Hatchback', images:['images/polo/vwp1.jpeg','images/polo/vwp2.jpeg','images/polo/vwp3.jpeg','images/polo/vwp4.jpeg'], price:'N$ 315,000', description:'Modern stylish hatchback with excellent fuel economy and agile handling.' },
+        { id:7, make:'Land Rover', model:'Range Rover Velar', year:2019, fuel:'Petrol', mileage:'93 054 km', transmission:'Automatic', displacement:'2.0', type:'SUV', images:['images/velar/rrv1.jpeg','images/velar/rrv2.jpeg','images/velar/rrv3.jpeg','images/velar/rrv4.jpeg'], price:'N$ 679,000', description:'Avant-garde luxury SUV with striking design and supreme off-road capability.' },
+        { id:8, make:'Mercedes-Benz', model:'GLA', year:2018, fuel:'Petrol', mileage:'107 726 km', transmission:'Automatic', displacement:'2.0', type:'SUV', images:['images/gla/mbgla1.jpg','images/gla/mbgla2.jpg','images/gla/mbgla3.jpg','images/gla/mbgla4.jpg'], price:'N$ 310,000', description:'Sporty crossover with compact agility and Mercedes refinement.' },
+        { id:9, make:'Mercedes-Benz', model:'GLC', year:2016, fuel:'Petrol', mileage:'113 000 km', transmission:'Automatic', displacement:'2.0', type:'SUV', images:['images/glc/mbglc1.jpeg','images/glc/mbglc2.jpeg','images/glc/mbglc3.jpeg','images/glc/mbglc4.jpeg'], price:'N$ 299,000', description:'Spacious mid-size luxury SUV with top-tier safety engineering.' },
+        { id:10, make:'Volkswagen', model:'Golf 7.5 tsi', year:2017, fuel:'Petrol', mileage:'57 000 km', transmission:'Automatic', displacement:'1.4', type:'Hatchback', images:['images/golftsi/vwgt1.jpeg','images/golftsi/vwgt2.jpeg','images/golftsi/vwgt3.jpeg','images/golftsi/vwgt4.jpeg'], price:'N$ 199,000', description:'Refined facelifted Golf TSI balancing efficiency and punchy performance.' },
+        { id:11, make:'Haval', model:'Jolion', year:2017, fuel:'Petrol', mileage:'90 702 km', transmission:'Automatic', displacement:'1.5', type:'SUV', images:['images/jolion/hj1.jpeg','images/jolion/hj2.jpeg','images/jolion/hj3.jpeg','images/jolion/hj4.jpeg'], price:'N$ 269,000', description:'Feature-packed compact SUV with modern styling and generous space.' },
+        { id:12, make:'Mini Cooper', model:'S', year:2017, fuel:'Petrol', mileage:'70 598 km', transmission:'Automatic', displacement:'2.0', type:'Hatchback', images:['images/miniCooper/mc1.jpeg','images/miniCooper/mc2.jpeg','images/miniCooper/mc3.jpeg','images/miniCooper/mc4.jpeg'], price:'N$ 175,000', description:'Iconic go-kart handling with spirited turbocharged engine.' },
+        { id:13, make:'Mini Cooper', model:'JCW', year:2016, fuel:'Petrol', mileage:'48 600 km', transmission:'Automatic', displacement:'2.0', type:'Hatchback', images:['images/miniCooperJCW/mcjcw1.jpg','images/miniCooperJCW/mcjcw2.jpg','images/miniCooperJCW/mcjcw3.jpg','images/miniCooperJCW/mcjcw4.jpg'], price:'N$ 299,000', description:'John Cooper Works edition for track-inspired thrills.' },
+        { id:14, make:'Audi', model:'Q5', year:2016, fuel:'Diesel', mileage:'44 770 km', transmission:'Automatic', displacement:'2.0', type:'SUV', images:['images/q5/aq51.jpeg','images/q5/aq52.jpeg','images/q5/aq53.jpeg','images/q5/aq54.jpeg'], price:'N$ 349,000', description:'Versatile premium diesel SUV with Quattro all-wheel drive.' },
+        { id:15, make:'Nissan', model:'Tiida', year:2016, fuel:'Petrol', mileage:'116 000 km', transmission:'Automatic', displacement:'1.5', type:'Hatchback', images:['images/tida/nt1.jpeg','images/tida/nt2.jpeg','images/tida/nt3.jpeg','images/tida/nt4.jpeg','images/tida/nt5.jpeg','images/tida/nt6.jpeg'], price:'N$ 79,000', description:'Affordable, reliable city runner with surprising interior space.' },
+        { id:16, make:'Ford', model:'Ranger', year:2019, fuel:'Diesel', mileage:'22 316 km', transmission:'Automatic', displacement:'2.0', type:'Bakkie/ Pick-up', images:['images/ranger/fr1.jpeg','images/ranger/fr2.jpeg','images/ranger/fr3.jpeg','images/ranger/fr4.jpeg'], price:'N$ 399,000', description:'Commanding double-cab bakkie with modern convenience and off-road capability.' },
+        { id:17, make:'Volkswagen', model:'Taigo', year:2023, fuel:'Petrol', mileage:'24 001 km', transmission:'Automatic', displacement:'1.0', type:'SUV', images:['images/taigo/vwt1.jpg','images/taigo/vwt2.jpg','images/taigo/vwt3.jpg','images/taigo/vwt4.jpg'], price:'N$ 429,000', description:'Sleek crossover coupe with digital cockpit and outstanding efficiency.' },
+        { id:18, make:'Audi', model:'A3', year:2014, fuel:'Petrol', mileage:'67 814 km', transmission:'Automatic', displacement:'1.8', type:'Hatchback', images:['images/a3/aa31.jpeg','images/a3/aa32.jpeg','images/a3/aa33.jpeg','images/a3/aa34.jpeg'], price:'N$ 179,000', description:'Compact executive hatchback with smooth turbo performance.' }
+    ];
 
+    const services = [
+        { icon:'fas fa-car-crash', title:'Vehicle Inspection', description:'150-point inspection for top quality and safety.' },
+        { icon:'fas fa-shield-alt', title:'Warranty & Support', description:'Comprehensive warranty and dedicated after-sales support.' },
+        { icon:'fas fa-money-check-alt', title:'Flexible Financing', description:'Competitive rates and tailored financing options.' },
+        { icon:'fas fa-tools', title:'Maintenance & Repairs', description:'State-of-the-art service center for all your needs.' }
+    ];
 
-// --- Data (Consider moving to a separate data.js file for larger applications) ---
-const cars = [{
-    id: 1,
-    make: 'Toyota',
-    model: 'Hilux',
-    year: 2022,
-    fuel: 'Diesel',
-    transmission: 'Automatic',
-    type: 'truck',
-    images: ['images/hilux/hiluxp1.jpg', 'images/hilux/hiluxp2.jpg', 'images/hilux/hiluxp3.jpg', 'images/hilux/hiluxp4.jpg', 'images/hilux/hiluxp5.jpg'],
-    price: 'N$ 450,000',
-    description: 'A robust and reliable pickup truck, perfect for both work and adventure. Features include a powerful diesel engine, spacious cabin, and advanced safety features.'
-}, {
-    id: 2,
-    make: 'Volkswagen',
-    model: 'Jetta',
-    year: 2015,
-    fuel: 'Petrol',
-    transmission: 'Automatic',
-    type: 'sedan',
-    images: ['images/jetta/jettap1.jpg', 'images/jetta/jettap2.jpg', 'images/jetta/jettap3.jpg', 'images/jetta/jettap4.jpg', 'images/jetta/jettap5.jpg', 'images/jetta/jettap6.jpg', 'images/jetta/jettap7.jpg'],
-    price: 'N$ 220,000',
-    description: 'A comfortable and efficient sedan, ideal for city driving and long commutes. Known for its smooth ride and fuel economy.'
-}, {
-    id: 3,
-    make: 'Mercedes-Benz',
-    model: 'A-Class',
-    year: 2020,
-    fuel: 'Petrol',
-    transmission: 'Automatic',
-    type: 'sedan',
-    images: ['images/a250/a250p1.jpg', 'images/a250/a250p2.jpg', 'images/a250/a250p3.jpg'],
-    price: 'N$ 680,000',
-    description: 'Luxury and performance combined. This C-Class offers a premium driving experience with state-of-the-art technology and exquisite comfort.'
-}, {
-    id: 4,
-    make: 'Mazda',
-    model: 'Demio',
-    year: 2014,
-    fuel: 'Petrol',
-    transmission: 'Automatic',
-    type: 'Hatchback',
-    images: ['images/demio/demiop1.jpg', 'images/demio/demiop2.jpg', 'images/demio/demiop3.jpg', 'images/demio/demiop4.jpg', 'images/demio/demiop5.jpg'],
-    price: 'N$ 750,000',
-    description: 'A fuel efficient city car, perfect for young professionals and adventurous spirits. Excellent handling and a luxurious interior.'
-}, {
-    id: 5,
-    make: 'Volkswagen',
-    model: 'Golf',
-    year: 2018,
-    fuel: 'Petrol',
-    transmission: 'Manual',
-    type: 'truck',
-    images: ['images/golf/golfp1.jpg', 'images/golf/golfp2.jpg', 'images/golf/golfp3.jpg', 'images/golf/golfp4.jpg', 'images/golf/golfp5.jpg', 'images/golf/golfp6.jpg', 'images/golf/golfp7.jpg'],
-    price: 'N$ 220,000',
-    description: 'Built Ford Tough! This Ranger is ready for any challenge, offering impressive towing capabilities and off-road prowess.'
-}, {
-    id: 6,
-    make: 'Volkswagen',
-    model: 'Polo',
-    year: 2014,
-    fuel: 'Petrol',
-    transmission: 'Automatic',
-    type: 'Hatchback',
-    images: ['images/polo/polop1.jpg', 'images/polo/polop2.jpg', 'images/polo/polop3.jpg', 'images/polo/polop4.jpg'],
-    price: 'N$ 310,000',
-    description: 'A versatile and stylish compact SUV, offering a comfortable ride and modern features. Great for urban adventures and weekend getaways.'
-}];
+    const testimonials = [
+        { content:'The transparency and quality at AutoDeals Namibia completely changed my mind. The Hilux is perfect!', author:'Johannes K.', rating:5 },
+        { content:'Finding a reliable sedan was my priority, and AutoDeals delivered! My Jetta runs like new.', author:'Maria S.', rating:4 },
+        { content:'The variety was impressive, and staff were helpful without being pushy. Drove away with my dream BMW X5.', author:'David L.', rating:5 },
+        { content:'Great service and fair prices. Found a fantastic Ford Ranger. Knowledgeable team, will return!', author:'Penda M.', rating:4 }
+    ];
 
-const services = [{
-    icon: 'fas fa-car-crash',
-    title: 'Vehicle Inspection',
-    description: 'Our certified technicians perform a thorough 150-point inspection to ensure top quality and safety for every vehicle.'
-}, {
-    icon: 'fas fa-shield-alt',
-    title: 'Warranty & Support',
-    description: 'We offer comprehensive warranty packages and dedicated after-sales support for your peace of mind.'
-}, {
-    icon: 'fas fa-money-check-alt',
-    title: 'Flexible Financing',
-    description: 'Get pre-approved for a loan with competitive rates. Our team helps you find the best financing options tailored to your needs.'
-}, {
-    icon: 'fas fa-tools',
-    title: 'Maintenance & Repairs',
-    description: 'From routine servicing to major repairs, our state-of-the-art service center is equipped to handle all your vehicle needs.'
-}];
+    // ----- DOM refs -----
+    const carGrid = document.getElementById('carGrid');
+    const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.getElementById('searchBtn');
+    const filterTags = document.querySelectorAll('.filter-tag');
+    const testimonialSlider = document.getElementById('testimonialSlider');
+    const servicesGrid = document.getElementById('servicesGrid');
+    const interestSelect = document.getElementById('interest');
+    const contactForm = document.getElementById('contactForm');
+    const newsletterForm = document.getElementById('newsletterForm');
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mainNav = document.getElementById('main-nav');
 
-const testimonials = [{
-    content: "I was hesitant about buying a used car, but the transparency and quality of service at AutoDeals Namibia completely changed my mind. The Hilux I bought is perfect!",
-    author: "Johannes K.",
-    rating: 5
-}, {
-    content: "Finding a reliable sedan was my priority, and AutoDeals Namibia delivered! My Jetta runs like new, and the financing process was surprisingly smooth. Highly recommend!",
-    author: "Maria S.",
-    rating: 4
-}, {
-    content: "The variety of vehicles was impressive, and the staff were incredibly helpful without being pushy. I drove away with my dream BMW X5. A truly professional experience.",
-    author: "David L.",
-    rating: 5
-}, {
-    content: "Great service and fair prices. I found a fantastic Ford Ranger here. The team was knowledgeable and answered all my questions patiently. Will definitely return!",
-    author: "Penda M.",
-    rating: 4
-}];
-
-
-// --- Mobile Menu Toggle ---
-/**
- * Toggles the mobile navigation menu's active state and updates the button icon.
- * Also controls body scrolling when the menu is open.
- */
-function toggleMobileMenu() {
-    const isOpen = mainNav.classList.toggle('active');
-    const iconElement = mobileMenuBtn.querySelector('.menu-icon');
-
-    if (iconElement) {
-        mobileMenuBtn.classList.toggle('active', isOpen);
-    } else {
-        mobileMenuBtn.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-    }
-
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-    mobileMenuBtn.setAttribute('aria-expanded', isOpen);
-}
-
-// --- Smooth Scrolling ---
-/**
- * Handles smooth scrolling for anchor links, adjusting for fixed header height.
- * @param {Event} e - The click event object.
- */
-function smoothScroll(e) {
-    e.preventDefault();
-
-    const targetId = this.getAttribute('href');
-    if (!targetId || targetId === '#') {
-        return;
-    }
-
-    const target = document.querySelector(targetId);
-    if (target) {
-        const headerOffset = document.querySelector('header').offsetHeight;
-        const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
-        const offsetPosition = elementPosition - headerOffset;
-
-        window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-        });
-
-        if (mainNav && mainNav.classList.contains('active')) {
-            toggleMobileMenu();
-        }
-    } else {
-        console.warn(`Smooth scroll target not found for ID: ${targetId}`);
-    }
-}
-
-
-// --- Car Display Functions ---
-/**
- * Creates an HTML card element for a given car object.
- * @param {Object} car - The car data object.
- * @returns {HTMLElement} The created car card div element.
- */
-function createCarCard(car) {
-    const card = document.createElement('div');
-    card.className = 'car-card';
-    card.dataset.type = car.type;
-
-    card.innerHTML = `
-        <div class="car-images">
-            <img src="${car.images[0]}" alt="${car.make} ${car.model} Front View" loading="lazy" decoding="async">
-            ${car.images[1] ? `<img src="${car.images[1]}" alt="${car.make} ${car.model} Interior View" loading="lazy" decoding="async">` : ''}
-        </div>
-        <div class="car-info">
-            <h3>${car.make} ${car.model}</h3>
-            <p class="car-specs">${car.year} • ${car.fuel} • ${car.transmission}</p>
-            <p class="car-description">${car.description || 'No description available.'}</p>
-            <p class="car-price"><strong>Price: ${car.price}</strong></p>
-            <a href="#contact" class="btn btn-primary inquire-btn">
-                <i class="fas fa-car"></i> Inquire Now
-            </a>
-        </div>
-    `;
-
-    const inquireButton = card.querySelector('.inquire-btn');
-    if (inquireButton) {
-        inquireButton.addEventListener('click', (e) => {
+    // ----- Helpers -----
+    function createCarCard(car) {
+        const div = document.createElement('div');
+        div.className = 'car-card';
+        div.innerHTML = `
+            <div class="car-images">
+                <img src="${car.images[0]}" alt="${car.make} ${car.model}" loading="lazy">
+                <img src="${car.images[1] || car.images[0]}" alt="${car.make} ${car.model}" loading="lazy">
+            </div>
+            <div class="car-info">
+                <h3>${car.make} ${car.model}</h3>
+                <div class="car-specs">${car.year} • ${car.fuel} • ${car.transmission}</div>
+                <div class="car-description">${car.description}</div>
+                <div class="car-price"><strong>${car.price}</strong></div>
+                <a href="#contact" class="btn btn-primary inquire-btn" style="width:100%;justify-content:center;"><i class="fas fa-car"></i> Inquire now</a>
+            </div>
+        `;
+        const btn = div.querySelector('.inquire-btn');
+        btn.addEventListener('click', function(e) {
             e.preventDefault();
-
-            const contactSection = document.getElementById('contact');
-            if (contactSection) {
-                const headerOffset = document.querySelector('header').offsetHeight;
-                const elementPosition = contactSection.getBoundingClientRect().top + window.pageYOffset;
-                const offsetPosition = elementPosition - headerOffset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-
+            document.getElementById('contact').scrollIntoView({ behavior:'smooth' });
             if (interestSelect) {
-                const optionToSelect = Array.from(interestSelect.options).find(
-                    option => option.value === `${car.make} ${car.model}`
-                );
-                if (optionToSelect) {
-                    interestSelect.value = optionToSelect.value;
-                } else {
-                    const newOption = document.createElement('option');
-                    newOption.value = `${car.make} ${car.model}`;
-                    newOption.textContent = `${car.make} ${car.model}`;
-                    interestSelect.appendChild(newOption);
-                    interestSelect.value = newOption.value;
+                const val = car.make + ' ' + car.model;
+                let opt = Array.from(interestSelect.options).find(function(o) { return o.value === val; });
+                if (!opt) {
+                    opt = document.createElement('option');
+                    opt.value = val;
+                    opt.textContent = val;
+                    interestSelect.appendChild(opt);
                 }
+                interestSelect.value = val;
             }
         });
+        return div;
     }
 
-    return card;
-}
-
-/**
- * Displays cars in the grid based on search filter and type.
- * @param {string} filter - Search term (case-insensitive) for make/model.
- * @param {string} type - Car type to filter by ('all', 'sedan', 'SUV', 'truck').
- */
-function displayCars(filter = '', type = 'all') {
-    if (!carGrid) {
-        console.error('Car grid element not found!');
-        return;
-    }
-
-    carGrid.innerHTML = '';
-    const lowerCaseFilter = filter.toLowerCase();
-
-    const filteredCars = cars.filter(car => {
-        const matchesSearch = !lowerCaseFilter ||
-            car.make.toLowerCase().includes(lowerCaseFilter) ||
-            car.model.toLowerCase().includes(lowerCaseFilter) ||
-            car.description.toLowerCase().includes(lowerCaseFilter);
-        const matchesType = type === 'all' || car.type === type;
-        return matchesSearch && matchesType;
-    });
-
-    if (filteredCars.length === 0) {
-        const noResultsDiv = document.createElement('div');
-        noResultsDiv.className = 'no-results text-center';
-        noResultsDiv.style.gridColumn = '1 / -1';
-        noResultsDiv.innerHTML = `
-            <i class="fas fa-info-circle" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;"></i>
-            <p>Oops! No vehicles found matching your criteria. Try adjusting your search or filters.</p>
-            <button class="btn btn-primary" onclick="resetFilters()">Show All Cars</button>
-        `;
-        carGrid.appendChild(noResultsDiv);
-        return;
-    }
-
-    const fragment = document.createDocumentFragment();
-    filteredCars.forEach(car => {
-        fragment.appendChild(createCarCard(car));
-    });
-    carGrid.appendChild(fragment);
-}
-
-/**
- * Resets the search input and filter tags to their default state, then re-displays all cars.
- */
-function resetFilters() {
-    if (searchInput) {
-        searchInput.value = '';
-    }
-    if (filterTags.length > 0) {
-        filterTags.forEach(tag => tag.classList.remove('active'));
-        const allTag = document.querySelector('.filter-tag[data-filter="all"]');
-        if (allTag) {
-            allTag.classList.add('active');
+    function displayCars(filter, type) {
+        filter = filter || '';
+        type = type || 'all';
+        if (!carGrid) return;
+        carGrid.innerHTML = '';
+        var f = filter.toLowerCase();
+        var filtered = cars.filter(function(car) {
+            var matchSearch = !f || car.make.toLowerCase().indexOf(f) !== -1 || car.model.toLowerCase().indexOf(f) !== -1 || car.description.toLowerCase().indexOf(f) !== -1;
+            var matchType = type === 'all' || car.type === type;
+            return matchSearch && matchType;
+        });
+        if (!filtered.length) {
+            carGrid.innerHTML = '<div class="no-results"><i class="fas fa-info-circle" style="font-size:2.4rem;color:var(--accent);margin-bottom:16px;display:block;"></i><p style="font-size:1.1rem;">No vehicles found. Try adjusting your search.</p><button class="btn btn-primary" style="margin-top:16px;" onclick="resetFilters()">Show all cars</button></div>';
+            return;
         }
-    }
-    displayCars();
-}
-
-
-// --- Search and Filter Functionality ---
-/**
- * Executes a search based on current search input and active filter tag.
- */
-function handleSearch() {
-    const searchTerm = searchInput ? searchInput.value.trim() : '';
-    const activeFilter = document.querySelector('.filter-tag.active');
-    const typeFilter = activeFilter ? activeFilter.dataset.filter : 'all';
-
-    displayCars(searchTerm, typeFilter);
-}
-
-
-// --- Initialize Services Section ---
-/**
- * Dynamically populates the services section with data.
- */
-function initServices() {
-    const servicesGrid = document.querySelector('.services-grid');
-    if (!servicesGrid) {
-        console.error('Services grid element not found!');
-        return;
+        var frag = document.createDocumentFragment();
+        filtered.forEach(function(c) {
+            frag.appendChild(createCarCard(c));
+        });
+        carGrid.appendChild(frag);
     }
 
-    const fragment = document.createDocumentFragment();
-    services.forEach(service => {
-        const card = document.createElement('div');
-        card.className = 'service-card';
-        card.innerHTML = `
-            <div class="service-icon" aria-hidden="true">
-                <i class="${service.icon}"></i>
-            </div>
-            <h3>${service.title}</h3>
-            <p>${service.description}</p>
-        `;
-        fragment.appendChild(card);
-    });
-    servicesGrid.appendChild(fragment);
-}
+    window.resetFilters = function() {
+        if (searchInput) searchInput.value = '';
+        filterTags.forEach(function(t) { t.classList.remove('active'); });
+        var allTag = document.querySelector('.filter-tag[data-filter="all"]');
+        if (allTag) allTag.classList.add('active');
+        displayCars();
+    };
 
-
-// --- Initialize Testimonials Section ---
-/**
- * Dynamically populates the testimonial section with data.
- */
-function initTestimonials() {
-    if (!testimonialSlider) {
-        console.error('Testimonial slider element not found!');
-        return;
+    function handleSearch() {
+        var term = searchInput ? searchInput.value.trim() : '';
+        var active = document.querySelector('.filter-tag.active');
+        var type = active ? active.dataset.filter : 'all';
+        displayCars(term, type);
     }
 
-    const fragment = document.createDocumentFragment();
-    testimonials.forEach(testimonial => {
-        const element = document.createElement('div');
-        element.className = 'testimonial';
-        element.innerHTML = `
-            <blockquote class="testimonial-content">"${testimonial.content}"</blockquote>
-            <p class="testimonial-author">- ${testimonial.author}</p>
-            <div class="testimonial-rating" role="img" aria-label="${testimonial.rating} out of 5 stars">
-                ${'<i class="fas fa-star" aria-hidden="true"></i>'.repeat(testimonial.rating)}
-            </div>
-        `;
-        fragment.appendChild(element);
-    });
-    testimonialSlider.appendChild(fragment);
-}
-
-
-// --- Form Handling ---
-/**
- * Handles form submissions for contact and newsletter forms.
- * @param {Event} e - The submit event object.
- * @param {string} formType - 'contact' or 'newsletter' to distinguish forms.
- */
-async function handleFormSubmit(e, formType) {
-    e.preventDefault();
-    const form = e.target;
-    const submitButton = form.querySelector('button[type="submit"]');
-
-    let isValid = true;
-    const inputs = form.querySelectorAll('input, textarea, select');
-    inputs.forEach(input => {
-        if (input.hasAttribute('required') && !input.value.trim()) {
-            input.classList.add('is-invalid');
-            isValid = false;
-        } else {
-            input.classList.remove('is-invalid');
-        }
-    });
-
-    if (!isValid) {
-        alert('Please fill in all required fields.');
-        return;
-    }
-
-    if (submitButton) {
-        submitButton.disabled = true;
-        submitButton.textContent = 'Sending...';
-    }
-
-    try {
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        alert(`Success! Thank you for your ${formType === 'contact' ? 'message' : 'subscription'}!`);
-        form.reset();
-    } catch (error) {
-        console.error(`Error submitting ${formType} form:`, error);
-        alert(`There was an error processing your ${formType}. Please try again later.`);
-    } finally {
-        if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.textContent = formType === 'contact' ? 'Send Message' : 'Subscribe';
-        }
-    }
-}
-
-
-// --- Initialize Page ---
-/**
- * Initializes all dynamic content and functionality on page load.
- */
-function initPage() {
-    displayCars();
-    initServices();
-    initTestimonials();
-
-    if (interestSelect) {
-        const defaultOption = document.createElement('option');
-        defaultOption.value = '';
-        defaultOption.textContent = 'Select a vehicle (optional)';
-        defaultOption.selected = true;
-        defaultOption.disabled = true;
-        interestSelect.appendChild(defaultOption);
-
-        cars.forEach(car => {
-            const option = document.createElement('option');
-            option.value = `${car.make} ${car.model}`;
-            option.textContent = `${car.make} ${car.model}`;
-            interestSelect.appendChild(option);
+    function initServices() {
+        if (!servicesGrid) return;
+        servicesGrid.innerHTML = '';
+        services.forEach(function(s) {
+            var div = document.createElement('div');
+            div.className = 'service-card';
+            div.innerHTML = '<div class="service-icon"><i class="' + s.icon + '"></i></div><h3>' + s.title + '</h3><p>' + s.description + '</p>';
+            servicesGrid.appendChild(div);
         });
     }
 
-    // Attach all event listeners in one central place
-    if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+    function initTestimonials() {
+        if (!testimonialSlider) return;
+        testimonialSlider.innerHTML = '';
+        testimonials.forEach(function(t) {
+            var div = document.createElement('div');
+            div.className = 'testimonial';
+            var stars = '';
+            for (var i = 0; i < t.rating; i++) stars += '<i class="fas fa-star"></i>';
+            div.innerHTML = '<div class="testimonial-content">“' + t.content + '”</div><div class="testimonial-author">- ' + t.author + '</div><div class="testimonial-rating">' + stars + '</div>';
+            testimonialSlider.appendChild(div);
+        });
     }
 
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        if (anchor.getAttribute('href') !== '#') {
-            anchor.addEventListener('click', smoothScroll);
-        }
-    });
-
-    if (searchBtn) {
-        searchBtn.addEventListener('click', handleSearch);
+    function populateInterest() {
+        if (!interestSelect) return;
+        interestSelect.innerHTML = '<option value="">Select a vehicle</option>';
+        cars.forEach(function(c) {
+            var opt = document.createElement('option');
+            opt.value = c.make + ' ' + c.model;
+            opt.textContent = c.make + ' ' + c.model;
+            interestSelect.appendChild(opt);
+        });
     }
-    if (searchInput) {
-        searchInput.addEventListener('keyup', (e) => {
-            if (e.key === 'Enter') {
-                handleSearch();
+
+    // ----- Form handlers -----
+    function handleFormSubmit(e, type) {
+        e.preventDefault();
+        var form = e.target;
+        var btn = form.querySelector('button[type="submit"]');
+        var inputs = form.querySelectorAll('input, textarea, select');
+        var valid = true;
+        inputs.forEach(function(inp) {
+            if (inp.hasAttribute('required') && !inp.value.trim()) {
+                inp.style.borderColor = '#c00';
+                valid = false;
+            } else {
+                inp.style.borderColor = '';
             }
         });
+        if (!valid) {
+            alert('Please fill in all required fields.');
+            return;
+        }
+        if (btn) {
+            btn.disabled = true;
+            btn.textContent = 'Sending…';
+        }
+        setTimeout(function() {
+            alert('Thank you! Your ' + (type === 'contact' ? 'message' : 'subscription') + ' was sent.');
+            form.reset();
+            if (btn) {
+                btn.disabled = false;
+                btn.textContent = type === 'contact' ? 'Send message' : 'Subscribe';
+            }
+        }, 800);
     }
-    if (filterTags.length > 0) {
-        filterTags.forEach(tag => {
+
+    // ----- Carousel -----
+    function initCarousel() {
+        var slides = document.querySelectorAll('.carousel-slide');
+        var dots = document.querySelectorAll('.dot');
+        var prev = document.querySelector('.prev-btn');
+        var next = document.querySelector('.next-btn');
+        var index = 0;
+        var interval;
+
+        function show(i) {
+            slides.forEach(function(s, idx) {
+                s.classList.toggle('active', idx === i);
+            });
+            dots.forEach(function(d, idx) {
+                d.classList.toggle('active', idx === i);
+            });
+        }
+
+        function nextSlide() {
+            index = (index + 1) % slides.length;
+            show(index);
+        }
+
+        function prevSlide() {
+            index = (index - 1 + slides.length) % slides.length;
+            show(index);
+        }
+
+        function resetAuto() {
+            clearInterval(interval);
+            interval = setInterval(nextSlide, 5000);
+        }
+
+        if (dots.length) {
+            dots.forEach(function(d, i) {
+                d.addEventListener('click', function() {
+                    index = i;
+                    show(index);
+                    resetAuto();
+                });
+            });
+        }
+        if (prev) {
+            prev.addEventListener('click', function() {
+                prevSlide();
+                resetAuto();
+            });
+        }
+        if (next) {
+            next.addEventListener('click', function() {
+                nextSlide();
+                resetAuto();
+            });
+        }
+        show(0);
+        resetAuto();
+
+        var hero = document.querySelector('.hero');
+        if (hero) {
+            hero.addEventListener('mouseenter', function() { clearInterval(interval); });
+            hero.addEventListener('mouseleave', resetAuto);
+        }
+    }
+
+    // ----- Mobile menu -----
+    function toggleMenu() {
+        var isOpen = mainNav.classList.toggle('active');
+        mobileBtn.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        mobileBtn.setAttribute('aria-expanded', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    // ----- Init -----
+    function init() {
+        displayCars();
+        initServices();
+        initTestimonials();
+        populateInterest();
+        initCarousel();
+
+        if (mobileBtn) mobileBtn.addEventListener('click', toggleMenu);
+        if (searchBtn) searchBtn.addEventListener('click', handleSearch);
+        if (searchInput) {
+            searchInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') handleSearch();
+            });
+        }
+        filterTags.forEach(function(tag) {
             tag.addEventListener('click', function() {
-                filterTags.forEach(t => t.classList.remove('active'));
+                filterTags.forEach(function(t) { t.classList.remove('active'); });
                 this.classList.add('active');
                 handleSearch();
             });
         });
-    }
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => handleFormSubmit(e, 'contact'));
-    }
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', (e) => handleFormSubmit(e, 'newsletter'));
-    }
-}
+        if (contactForm) contactForm.addEventListener('submit', function(e) { handleFormSubmit(e, 'contact'); });
+        if (newsletterForm) newsletterForm.addEventListener('submit', function(e) { handleFormSubmit(e, 'newsletter'); });
 
-// Run when DOM is loaded
-document.addEventListener('DOMContentLoaded', initPage);
-
-document.addEventListener('DOMContentLoaded', () => {
-    const slides = document.querySelectorAll('.carousel-slide');
-    const dots = document.querySelectorAll('.dot');
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
-    let currentIndex = 0;
-    let autoSlideInterval;
-
-    function showSlide(index) {
-        // Deactivate all slides and dots
-        slides.forEach((slide) => {
-            slide.classList.remove('active');
-            slide.setAttribute('aria-hidden', 'true');
+        document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+            a.addEventListener('click', function(e) {
+                var target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+                if (mainNav.classList.contains('active')) toggleMenu();
+            });
         });
-        dots.forEach((dot) => {
-            dot.classList.remove('active');
-            dot.setAttribute('aria-selected', 'false');
-        });
-
-        // Activate the current slide and dot
-        slides[index].classList.add('active');
-        slides[index].setAttribute('aria-hidden', 'false');
-        dots[index].classList.add('active');
-        dots[index].setAttribute('aria-selected', 'true');
     }
 
-    function nextSlide() {
-        currentIndex = (currentIndex + 1) % slides.length;
-        showSlide(currentIndex);
-    }
-
-    function prevSlide() {
-        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-        showSlide(currentIndex);
-    }
-
-    // Event listeners for navigation buttons
-    nextBtn.addEventListener('click', () => {
-        nextSlide();
-        resetAutoSlide();
-    });
-
-    prevBtn.addEventListener('click', () => {
-        prevSlide();
-        resetAutoSlide();
-    });
-
-    // Event listeners for dots
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-            currentIndex = index;
-            showSlide(currentIndex);
-            resetAutoSlide();
-        });
-    });
-
-    // Auto-slide functionality
-    function startAutoSlide() {
-        autoSlideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
-    }
-
-    function resetAutoSlide() {
-        clearInterval(autoSlideInterval);
-        startAutoSlide();
-    }
-
-    // Start the auto-slide when the page loads
-    startAutoSlide();
-
-    // Pause auto-slide on hover for better user experience
-    const heroSection = document.querySelector('.hero');
-    heroSection.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
-    heroSection.addEventListener('mouseleave', () => startAutoSlide());
-
-    // Initialize the first slide
-    showSlide(currentIndex);
-});
+    document.addEventListener('DOMContentLoaded', init);
+})();
